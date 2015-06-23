@@ -1,0 +1,135 @@
+﻿<Page x:Class="CustomPanels.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:CustomPanels"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
+
+    <Page.Resources>
+        <CollectionViewSource x:Name="GroupedItemsSource"
+                              IsSourceGrouped="True"
+                              Source="{Binding GroupedItems}" />
+    </Page.Resources>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Hub Header="Custom panels">
+            <HubSection Header="Default">
+                <HubSection.ContentTemplate>
+                    <DataTemplate>
+                        <GridView ItemsSource="{Binding Items}"
+                                  SelectionMode="None">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch">
+                                        <TextBlock Text="{Binding}"
+                                                   Margin="20"
+                                                   TextWrapping="Wrap"
+                                                   TextTrimming="WordEllipsis" />
+                                    </Border>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </DataTemplate>
+                </HubSection.ContentTemplate>
+            </HubSection>
+
+
+            <HubSection Header="Custom">
+                <HubSection.ContentTemplate>
+                    <DataTemplate>
+                        <GridView ItemsSource="{Binding Items}"
+                                  SelectionMode="None">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch">
+                                        <TextBlock Text="{Binding}"
+                                                   Margin="20"
+                                                   TextWrapping="Wrap"
+                                                   TextTrimming="WordEllipsis" />
+                                    </Border>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Stretch" />
+                                    <Setter Property="VerticalContentAlignment"
+                                            Value="Stretch" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
+
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <local:CustomPanel />
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                        </GridView>
+                    </DataTemplate>
+                </HubSection.ContentTemplate>
+            </HubSection>
+
+
+
+
+            <HubSection Header="Custom grouped">
+                <HubSection.ContentTemplate>
+                    <DataTemplate>
+                        <GridView ItemsSource="{Binding Source={StaticResource GroupedItemsSource}}"
+                                  SelectionMode="None">
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch">
+                                        <TextBlock Text="{Binding}"
+                                                   Margin="20"
+                                                   TextWrapping="Wrap"
+                                                   TextTrimming="WordEllipsis" />
+                                    </Border>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+
+                            <GridView.ItemContainerStyle>
+                                <Style TargetType="GridViewItem">
+                                    <Setter Property="HorizontalContentAlignment"
+                                            Value="Stretch" />
+                                    <Setter Property="VerticalContentAlignment"
+                                            Value="Stretch" />
+                                </Style>
+                            </GridView.ItemContainerStyle>
+
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+
+                            <GridView.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.HeaderTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Key}"
+                                                       FontSize="40" />
+                                        </DataTemplate>
+                                    </GroupStyle.HeaderTemplate>
+
+                                    <GroupStyle.Panel>
+                                        <ItemsPanelTemplate>
+                                            <local:CustomPanel />
+                                        </ItemsPanelTemplate>
+                                    </GroupStyle.Panel>
+                                </GroupStyle>
+                            </GridView.GroupStyle>
+                        </GridView>
+                    </DataTemplate>
+                </HubSection.ContentTemplate>
+            </HubSection>
+        </Hub>
+
+    </Grid>
+</Page>
